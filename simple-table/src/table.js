@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Table } from 'react-infinite-table';
 import firebase from './firebase-config';
-import css from './style.css';
 
 function InfiniteTable () {
 
@@ -9,6 +8,7 @@ function InfiniteTable () {
     const [rows, setRows] = useState([]);
     const [lastVisible, setLastVisible] = useState();
     const [dataRef, setDataRef] = useState();
+    const [search, setSearch] = useState('');
 
     const initialLoad = () => {
         const db = firebase.firestore();
@@ -72,7 +72,7 @@ function InfiniteTable () {
             headerRenderer: ({ columnIndex, column, className }) => {
                 return (
                     <>
-                        <th className={css.th}>
+                        <th className={className}>
                             First Name
                         </th>
                         <th className={className}>
@@ -87,14 +87,34 @@ function InfiniteTable () {
                     </>
                 )
             },
-            width: 175,
-            name: 'Sample People Data'
+            width: 125,
         },
     ]
 
+    const inputStyle = {
+            width: '600px',
+            fontSize: '18px',
+            outline: 'None',
+            border: '1px solid #eee',
+            marginLeft: '12px',
+            paddingLeft: '2px',
+            marginBottom: '2px',
+            boxShadow: '0 4px 12px rgba(32,33,36,.28)',
+            padding: '12px',
+            borderRadius: '40px',
+            display: 'flex', 
+    };
+
     return (
         <>
-
+            <br /><br/>
+            <input
+                placeholder="Search here..."
+                type="text"
+                style={inputStyle}
+                value={search}
+                onChange={ev => setSearch(ev.target.value)}
+            />
             <br /> <br />
             <Table
                 className='table'

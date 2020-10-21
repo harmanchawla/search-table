@@ -1,6 +1,7 @@
 # firebase secret files
 config.js
 serviceAccount.json
+firebase-config.js
 
 # npm packages
 node_modules
